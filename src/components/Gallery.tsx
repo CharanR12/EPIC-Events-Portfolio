@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useLanguage } from '../lib/i18n/LanguageContext';
 import type { Database } from '../lib/database.types';
 
 type Event = Database['public']['Tables']['events']['Row'];
@@ -10,6 +11,12 @@ export default function Gallery() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [loading, setLoading] = useState(true);
+  const { t, language } = useLanguage();
+
+  const getLocalizedContent = (en: string | null, ta: string | null) => {
+    if (language === 'ta' && ta) return ta;
+    return en || '';
+  };
 
   useEffect(() => {
     async function fetchEvents() {
@@ -20,7 +27,15 @@ export default function Gallery() {
           .order('date', { ascending: false });
 
         if (error) throw error;
-        setEvents(data || []);
+        
+        // Apply localization to the fetched events
+        const localizedEvents = (data || []).map(event => ({
+          ...event,
+          name: getLocalizedContent(event.name_en, event.name_ta),
+          description: getLocalizedContent(event.description_en, event.description_ta)
+        }));
+
+        setEvents(localizedEvents);
       } catch (error) {
         console.error('Error fetching events:', error);
       } finally {
@@ -29,7 +44,7 @@ export default function Gallery() {
     }
 
     fetchEvents();
-  }, []);
+  }, [language]); // Add language to dependency array to re-fetch when language changes
 
   useEffect(() => {
     let interval: NodeJS.Timeout;
@@ -70,10 +85,10 @@ export default function Gallery() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
-            Past Events Gallery
+            {t('gallery.title')}
           </h2>
           <p className="text-xl text-accent/80 max-w-3xl mx-auto">
-            Take a look at some of our most memorable gaming events and celebrations.
+            {t('gallery.subtitle')}
           </p>
         </div>
 
@@ -99,7 +114,7 @@ export default function Gallery() {
                   <div className="absolute bottom-0 left-0 right-0 p-8">
                     <h3 className="text-2xl font-bold text-secondary mb-2">{event.name}</h3>
                     <p className="text-secondary">
-                      {new Date(event.date).toLocaleDateString('en-US', {
+                      {new Date(event.date).toLocaleDateString(undefined, {
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'

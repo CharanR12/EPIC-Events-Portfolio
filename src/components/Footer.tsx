@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useLanguage } from '../lib/i18n/LanguageContext';
 import type { Database } from '../lib/database.types';
 
 type SocialLink = Database['public']['Tables']['social_links']['Row'];
@@ -12,6 +13,7 @@ export default function Footer() {
   const [footerContent, setFooterContent] = useState<FooterContent | null>(null);
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t,language } = useLanguage();
 
   useEffect(() => {
     async function fetchFooterData() {
@@ -46,6 +48,11 @@ export default function Footer() {
     fetchFooterData();
   }, []);
 
+  const getLocalizedContent = (en: string | null, ta: string | null) => {
+    if (language === 'ta' && ta) return ta;
+    return en || '';
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -56,7 +63,7 @@ export default function Footer() {
   const getIconComponent = (iconName: string) => {
     switch (iconName.toLowerCase()) {
       case 'facebook':
-        return <Facebook className="h-6 w-6 "  />;
+        return <Facebook className="h-6 w-6" />;
       case 'twitter':
         return <Twitter className="h-6 w-6" />;
       case 'instagram':
@@ -90,7 +97,8 @@ export default function Footer() {
               <span className="ml-2 text-xl font-bold font-poppins">Epic Events</span>
             </div>
             <p className="text-accent/80 mb-4">
-              {footerContent?.company_description}
+              
+              {footerContent ? getLocalizedContent(footerContent.company_description, footerContent.company_description_ta) : t('hero.title')}
             </p>
             <div className="flex space-x-4">
               {socialLinks.map((link) => (
@@ -108,14 +116,14 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 font-poppins">Quick Links</h3>
+            <h3 className="text-lg font-semibold mb-4 font-poppins">{t('nav.home')}</h3>
             <ul className="space-y-2">
               <li>
                 <button
                   onClick={() => scrollToSection('home')}
                   className="text-accent/60 hover:text-accent transition-colors"
                 >
-                  Home
+                  {t('nav.home')}
                 </button>
               </li>
               <li>
@@ -123,15 +131,15 @@ export default function Footer() {
                   onClick={() => scrollToSection('games')}
                   className="text-accent/60 hover:text-accent transition-colors"
                 >
-                  Games
+                  {t('nav.games')}
                 </button>
               </li>
               <li>
                 <button
                   onClick={() => scrollToSection('gallery')}
-                   className="text-accent/60 hover:text-accent transition-colors"
+                  className="text-accent/60 hover:text-accent transition-colors"
                 >
-                  Gallery
+                  {t('nav.gallery')}
                 </button>
               </li>
               <li>
@@ -139,14 +147,14 @@ export default function Footer() {
                   onClick={() => scrollToSection('booking')}
                   className="text-accent/60 hover:text-accent transition-colors"
                 >
-                  Book Now
+                  {t('nav.bookNow')}
                 </button>
               </li>
             </ul>
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-4 font-poppins">Contact Info</h3>
+            <h3 className="text-lg font-semibold mb-4 font-poppins">{t('contact.title')}</h3>
             <ul className="space-y-2">
               {contactInfo && (
                 <>

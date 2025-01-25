@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import BasicGameCard from './BasicGameCard';
 import { supabase } from '../lib/supabase';
+import { useLanguage } from '../lib/i18n/LanguageContext';
 import type { Database } from '../lib/database.types';
 
 type BasicGame = Database['public']['Tables']['basic_game_cards']['Row'];
@@ -8,6 +9,12 @@ type BasicGame = Database['public']['Tables']['basic_game_cards']['Row'];
 export default function Games() {
   const [games, setGames] = useState<BasicGame[]>([]);
   const [loading, setLoading] = useState(true);
+  const { t, language } = useLanguage();
+
+  const getLocalizedContent = (en: string | null, ta: string | null) => {
+    if (language === 'ta' && ta) return ta;
+    return en || '';
+  };
 
   useEffect(() => {
     async function fetchGames() {
@@ -18,7 +25,16 @@ export default function Games() {
           .order('created_at', { ascending: false });
 
         if (error) throw error;
-        setGames(data || []);
+        
+        // Apply localization to the fetched games
+        const localizedGames = (data || []).map(game => ({
+          ...game,
+          title: getLocalizedContent(game.title_en, game.title_ta),
+          description: getLocalizedContent(game.description_en, game.description_ta),
+          // Add any other localized fields here
+        }));
+
+        setGames(localizedGames);
       } catch (error) {
         console.error('Error fetching games:', error);
       } finally {
@@ -27,17 +43,17 @@ export default function Games() {
     }
 
     fetchGames();
-  }, []);
+  }, [language]); // Add language to dependency array to re-fetch when language changes
 
   return (
     <section id="games" className="py-24 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-accent mb-4">
-            Our Gaming Experiences
+            {t('games.title')}
           </h2>
           <p className="text-xl text-accent/80 max-w-3xl mx-auto">
-            Choose from our wide selection of gaming experiences, each designed to provide maximum entertainment for all skill levels.
+            {t('games.subtitle')}
           </p>
         </div>
         

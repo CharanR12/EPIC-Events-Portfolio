@@ -5,17 +5,20 @@ import Games from './components/Games';
 import Gallery from './components/Gallery';
 import BookingForm from './components/BookingForm';
 import Footer from './components/Footer';
+import { LanguageProvider } from './lib/i18n/LanguageContext';
 
 function App() {
   return (
-    <div className="min-h-screen">
-      <Navbar />
-      <Hero />
-      <Games />
-      <Gallery />
-      <BookingForm />
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen">
+        <Navbar />
+        <Hero />
+        <Games />
+        <Gallery />
+        <BookingForm />
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }
 
