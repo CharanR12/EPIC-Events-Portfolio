@@ -101,7 +101,7 @@ export default function BookingForm() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="form-input pr-10 bg-secondary/20 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
+                  className="form-input pr-10 bg-secondary/40 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
                   disabled={loading}
                 />
               </div>
@@ -118,7 +118,7 @@ export default function BookingForm() {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="form-input pr-10 bg-secondary/20 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
+                    className="form-input pr-10 bg-secondary/40 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
                     disabled={loading}
                   />
                 </div>
@@ -133,7 +133,7 @@ export default function BookingForm() {
                     value={formData.phone}
                     onChange={handleChange}
                     required
-                    className="form-input pr-10 bg-secondary/20 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
+                    className="form-input pr-10 bg-secondary/40 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
                     disabled={loading}
                   />
                 </div>
@@ -152,7 +152,7 @@ export default function BookingForm() {
                       value={formData.date}
                       onChange={handleChange}
                       required
-                      className="form-input pr-10 bg-secondary/20 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
+                      className="form-input pr-10 bg-secondary/40 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
                       disabled={loading}
                     />
                   </div>
@@ -167,7 +167,7 @@ export default function BookingForm() {
                     value={formData.event_type}
                     onChange={handleChange}
                     required
-                    className="form-input pr-10 bg-secondary/20 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
+                    className="form-input pr-10 bg-secondary/40 border-black hover:bg-secondary/80 hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
                     disabled={loading}
                   >
                     <option value="">{t('booking.selectEventType')}</option>
@@ -189,7 +189,7 @@ export default function BookingForm() {
                   value={formData.requirements || ''}
                   onChange={handleChange}
                   rows={4}
-                  className="form-input pr-10 bg-secondary/20 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
+                  className="form-input pr-10 bg-secondary/40 border-black hover:bg-secondary hover:border-accent focus:bg-secondary focus:border-blue-500 border rounded-md"
                   disabled={loading}
                 ></textarea>
               </div>
@@ -213,8 +213,8 @@ export default function BookingForm() {
               {contactInfo && (
               <div className="space-y-8">
                 <a 
-                  href="mailto:info@epicevents.com" 
-                  className="flex items-center p-4 rounded-lg hover:bg-secondary/20 transition-colors group"
+                  href={`mailto:${contactInfo.email}`}
+                  className="flex items-center p-4 rounded-lg hover:bg-secondary/60 transition-colors group"
                 >
                   <div className="bg-secondary/40 p-3 rounded-full group-hover:bg-secondary transition-colors">
                     <Mail className="h-6 w-6 text-gray-900" />
@@ -228,8 +228,8 @@ export default function BookingForm() {
                 </a>
 
                 <a 
-                  href="tel:+15551234567" 
-                  className="flex items-center p-4 rounded-lg hover:bg-secondary/20 transition-colors group"
+                  href={`tel:${contactInfo.phone}`}
+                  className="flex items-center p-4 rounded-lg hover:bg-secondary/60 transition-colors group"
                 >
                   <div className="bg-secondary/40 p-3 rounded-full group-hover:bg-secondary transition-colors">
                     <Phone className="h-6 w-6 text-gray-900" />
