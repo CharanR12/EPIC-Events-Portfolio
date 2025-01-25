@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Sora:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Sora', sans-serif;
+  @apply bg-background text-text;
+}
+
+h1, h2, h3, .heading-font {
+  font-family: 'Poppins', sans-serif;
+}
+
+.glass-effect {
+  @apply bg-background/95 shadow-md backdrop-blur-sm;
+}
+
+.game-card {
+  transition: transform 0.3s ease;
+  display: none; /* Hide the original game cards */
+}
+
+.game-card-basic {
+  position: relative;
+  transform: translateY(0);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.game-card-basic:hover {
+  transform: translateY(-4px);
+}
+
+.form-input {
+  @apply w-full px-4 py-3 border border-secondary/20 rounded-lg focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-200;
+}
+
+.form-input:hover {
+  @apply border-secondary/40;
+}
+
+.calendar-icon {
+  transition: transform 0.3s ease;
+}
+
+.calendar-icon:hover {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Custom scrollbar for modals */
+.overflow-y-auto {
+  scrollbar-width: thin;
+  scrollbar-color: theme('colors.secondary') theme('colors.background');
+}
+
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  @apply bg-background rounded;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  @apply bg-secondary/30 rounded;
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
