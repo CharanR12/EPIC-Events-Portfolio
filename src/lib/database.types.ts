@@ -13,6 +13,7 @@ export interface Database {
         Row: {
           id: string
           name: string
+          name_ta: string | null
           image: string
           created_at: string
           updated_at: string
@@ -20,6 +21,7 @@ export interface Database {
         Insert: {
           id?: string
           name: string
+          name_ta?: string | null
           image: string
           created_at?: string
           updated_at?: string
@@ -27,6 +29,7 @@ export interface Database {
         Update: {
           id?: string
           name?: string
+          name_ta?: string | null
           image?: string
           created_at?: string
           updated_at?: string
@@ -71,6 +74,7 @@ export interface Database {
         Row: {
           id: string
           name: string
+          name_ta: string | null
           image: string
           date: string
           created_at: string
@@ -79,6 +83,7 @@ export interface Database {
         Insert: {
           id?: string
           name: string
+          name_ta?: string | null
           image: string
           date: string
           created_at?: string
@@ -87,6 +92,7 @@ export interface Database {
         Update: {
           id?: string
           name?: string
+          name_ta?: string | null
           image?: string
           date?: string
           created_at?: string
@@ -97,7 +103,9 @@ export interface Database {
         Row: {
           id: string
           title: string
+          title_ta: string | null
           subtitle: string
+          subtitle_ta: string | null
           background_image: string
           created_at: string
           updated_at: string
@@ -105,7 +113,9 @@ export interface Database {
         Insert: {
           id?: string
           title: string
+          title_ta?: string | null
           subtitle: string
+          subtitle_ta?: string | null
           background_image: string
           created_at?: string
           updated_at?: string
@@ -113,7 +123,9 @@ export interface Database {
         Update: {
           id?: string
           title?: string
+          title_ta?: string | null
           subtitle?: string
+          subtitle_ta?: string | null
           background_image?: string
           created_at?: string
           updated_at?: string
@@ -172,18 +184,21 @@ export interface Database {
         Row: {
           id: string
           company_description: string
+          company_description_ta: string | null
           created_at: string
           updated_at: string
         }
         Insert: {
           id?: string
           company_description: string
+          company_description_ta?: string | null
           created_at?: string
           updated_at?: string
         }
         Update: {
           id?: string
           company_description?: string
+          company_description_ta?: string | null
           created_at?: string
           updated_at?: string
         }
