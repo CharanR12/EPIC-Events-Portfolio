@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, Phone, Calendar } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useLanguage } from '../lib/i18n/LanguageContext';
@@ -6,8 +6,10 @@ import toast from 'react-hot-toast';
 import type { Database } from '../lib/database.types';
 
 type BookingRequest = Database['public']['Tables']['booking_requests']['Insert'];
+type ContactInfo = Database['public']['Tables']['contact_info']['Row'];
 
 export default function BookingForm() {
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   const [formData, setFormData] = useState<BookingRequest>({
     name: '',
     email: '',
@@ -16,6 +18,27 @@ export default function BookingForm() {
     event_type: '',
     requirements: ''
   });
+
+  useEffect(() => {
+    async function fetchcontactinfo() {
+      try {
+       
+        // Fetch contact info
+        const { data: contactData } = await supabase
+          .from('contact_info')
+          .select('*')
+          .single();
+
+        if (contactData) setContactInfo(contactData);
+      } catch (error) {
+        console.error('Error fetching footer data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchcontactinfo();
+  }, []);
 
   const [loading, setLoading] = useState(false);
   const { t } = useLanguage();
@@ -187,7 +210,7 @@ export default function BookingForm() {
           <div className="lg:pl-8">
             <div className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow duration-300">
               <h3 className="text-2xl font-bold text-accent mb-8 font-poppins">{t('contact.title')}</h3>
-              
+              {contactInfo && (
               <div className="space-y-8">
                 <a 
                   href="mailto:info@epicevents.com" 
@@ -199,7 +222,7 @@ export default function BookingForm() {
                   <div className="ml-4">
                     <h4 className="font-semibold text-gray-900 mb-1">{t('contact.emailUs')}</h4>
                     <span className="text-gray-600 group-hover:text-accent transition-colors">
-                      info@epicevents.com
+                    {contactInfo.email}
                     </span>
                   </div>
                 </a>
@@ -214,11 +237,11 @@ export default function BookingForm() {
                   <div className="ml-4">
                     <h4 className="font-semibold text-gray-900 mb-1">{t('contact.callUs')}</h4>
                     <span className="text-gray-600 group-hover:text-accent transition-colors">
-                      (555) 123-4567
+                    {contactInfo.phone}
                     </span>
                   </div>
                 </a>
-              </div>
+              </div>)}
             </div>
           </div>
         </div>
