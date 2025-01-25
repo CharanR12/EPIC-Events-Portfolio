@@ -31,8 +31,8 @@ export default function Gallery() {
         // Apply localization to the fetched events
         const localizedEvents = (data || []).map(event => ({
           ...event,
-          name: getLocalizedContent(event.name_en, event.name_ta),
-          description: getLocalizedContent(event.description_en, event.description_ta)
+          name: getLocalizedContent(event.name, event.name_ta),
+          description: getLocalizedContent(event.description, event.description_ta)
         }));
 
         setEvents(localizedEvents);
