@@ -3,6 +3,7 @@ export const translations = {
     nav: {
       home: 'Home',
       games: 'Games',
+      services: 'Services',
       gallery: 'Gallery',
       bookNow: 'Book Now'
     },
@@ -12,7 +13,20 @@ export const translations = {
     },
     games: {
       title: 'Our Gaming Experiences',
-      subtitle: 'Choose from our wide selection of gaming experiences, each designed to provide maximum entertainment for all skill levels.'
+      subtitle: 'Choose from our wide selection of gaming experiences, each designed to provide maximum entertainment for all skill levels.',
+      categories: {
+        all: 'All Games',
+        vr: 'Virtual Reality',
+        console: 'Console Gaming',
+        arcade: 'Arcade',
+        racing: 'Racing'
+      },
+      showMore: 'Show More Games',
+      showLess: 'Show Less'
+    },
+    services: {
+      title: 'Additional Services',
+      subtitle: 'Enhance your gaming event with our premium additional services.'
     },
     gallery: {
       title: 'Past Events Gallery',
@@ -32,7 +46,8 @@ export const translations = {
       birthday: 'Birthday Party',
       corporate: 'Corporate Event',
       tournament: 'Gaming Tournament',
-      other: 'Other'
+      other: 'Other',
+      selectGames: 'Select Games'
     },
     contact: {
       title: 'Contact Information',
@@ -44,6 +59,7 @@ export const translations = {
     nav: {
       home: 'முகப்பு',
       games: 'விளையாட்டுகள்',
+      services: 'சேவைகள்',
       gallery: 'காட்சியகம்',
       bookNow: 'இப்போது முன்பதிவு செய்க'
     },
@@ -53,7 +69,20 @@ export const translations = {
     },
     games: {
       title: 'எங்கள் கேமிங் அனுபவங்கள்',
-      subtitle: 'அனைத்து திறன் மட்டங்களுக்கும் அதிகபட்ச பொழுதுபோக்கை வழங்க வடிவமைக்கப்பட்ட எங்கள் பரந்த கேமிங் அனுபவங்களிலிருந்து தேர்வு செய்யவும்.'
+      subtitle: 'அனைத்து திறன் மட்டங்களுக்கும் அதிகபட்ச பொழுதுபோக்கை வழங்க வடிவமைக்கப்பட்ட எங்கள் பரந்த கேமிங் அனுபவங்களிலிருந்து தேர்வு செய்யவும்.',
+      categories: {
+        all: 'அனைத்து விளையாட்டுகள்',
+        vr: 'மெய்நிகர் யதார்த்தம்',
+        console: 'கன்சோல் கேமிங்',
+        arcade: 'ஆர்கேட்',
+        racing: 'ரேசிங்'
+      },
+      showMore: 'மேலும் விளையாட்டுகளைக் காட்டு',
+      showLess: 'குறைவாகக் காட்டு'
+    },
+    services: {
+      title: 'கூடுதல் சேவைகள்',
+      subtitle: 'எங்கள் பிரீமியம் கூடுதல் சேவைகளுடன் உங்கள் கேமிங் நிகழ்வை மேம்படுத்துங்கள்.'
     },
     gallery: {
       title: 'கடந்த நிகழ்வுகள் காட்சியகம்',
@@ -73,7 +102,8 @@ export const translations = {
       birthday: 'பிறந்தநாள் விழா',
       corporate: 'கார்ப்பரேட் நிகழ்வு',
       tournament: 'கேமிங் போட்டி',
-      other: 'மற்றவை'
+      other: 'மற்றவை',
+      selectGames: 'விளையாட்டுகளைத் தேர்ந்தெடுக்கவும்'
     },
     contact: {
       title: 'தொடர்பு தகவல்',

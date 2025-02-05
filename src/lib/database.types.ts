@@ -15,6 +15,8 @@ export interface Database {
           name: string
           name_ta: string | null
           image: string
+          category_id: string | null
+          selected: boolean
           created_at: string
           updated_at: string
         }
@@ -23,6 +25,8 @@ export interface Database {
           name: string
           name_ta?: string | null
           image: string
+          category_id?: string | null
+          selected?: boolean
           created_at?: string
           updated_at?: string
         }
@@ -31,52 +35,18 @@ export interface Database {
           name?: string
           name_ta?: string | null
           image?: string
+          category_id?: string | null
+          selected?: boolean
           created_at?: string
           updated_at?: string
         }
       }
-      games: {
-        Row: {
-          id: string
-          name: string
-          image: string
-          preview: string
-          description: string
-          how_to_play: string
-          equipment: string
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          name: string
-          image: string
-          preview: string
-          description: string
-          how_to_play: string
-          equipment: string
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          name?: string
-          image?: string
-          preview?: string
-          description?: string
-          how_to_play?: string
-          equipment?: string
-          created_at?: string
-          updated_at?: string
-        }
-      }
-      events: {
+      game_categories: {
         Row: {
           id: string
           name: string
           name_ta: string | null
-          image: string
-          date: string
+          slug: string
           created_at: string
           updated_at: string
         }
@@ -84,8 +54,7 @@ export interface Database {
           id?: string
           name: string
           name_ta?: string | null
-          image: string
-          date: string
+          slug: string
           created_at?: string
           updated_at?: string
         }
@@ -93,8 +62,7 @@ export interface Database {
           id?: string
           name?: string
           name_ta?: string | null
-          image?: string
-          date?: string
+          slug?: string
           created_at?: string
           updated_at?: string
         }

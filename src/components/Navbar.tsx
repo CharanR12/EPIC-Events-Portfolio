@@ -32,6 +32,9 @@ export default function Navbar() {
             <button onClick={() => scrollToSection('games')} className="text-text/80 hover:text-text transition-colors">
               {t('nav.games')}
             </button>
+            <button onClick={() => scrollToSection('services')} className="text-text/80 hover:text-text transition-colors">
+              {t('nav.services')}
+            </button>
             <button onClick={() => scrollToSection('gallery')} className="text-text/80 hover:text-text transition-colors">
               {t('nav.gallery')}
             </button>
@@ -63,6 +66,9 @@ export default function Navbar() {
               </button>
               <button onClick={() => scrollToSection('games')} className="block w-full text-left px-3 py-2 text-text/80 hover:bg-secondary/10 rounded-md">
                 {t('nav.games')}
+              </button>
+              <button onClick={() => scrollToSection('services')} className="block w-full text-left px-3 py-2 text-text/80 hover:bg-secondary/10 rounded-md">
+                {t('nav.services')}
               </button>
               <button onClick={() => scrollToSection('gallery')} className="block w-full text-left px-3 py-2 text-text/80 hover:bg-secondary/10 rounded-md">
                 {t('nav.gallery')}
