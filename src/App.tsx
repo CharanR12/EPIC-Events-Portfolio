@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Games from './components/Games';
+import OtherServices from './components/OtherServices';
 import Gallery from './components/Gallery';
 import BookingForm from './components/BookingForm';
 import Footer from './components/Footer';
@@ -14,6 +15,7 @@ function App() {
         <Navbar />
         <Hero />
         <Games />
+        <OtherServices />
         <Gallery />
         <BookingForm />
         <Footer />

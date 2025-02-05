@@ -4,44 +4,54 @@ import { supabase } from '../lib/supabase';
 import { useLanguage } from '../lib/i18n/LanguageContext';
 import toast from 'react-hot-toast';
 import type { Database } from '../lib/database.types';
+import MultiSelect from './MultiSelect';
 
 type BookingRequest = Database['public']['Tables']['booking_requests']['Insert'];
 type ContactInfo = Database['public']['Tables']['contact_info']['Row'];
+type BasicGame = Database['public']['Tables']['basic_game_cards']['Row'];
 
 export default function BookingForm() {
   const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
+  const [games, setGames] = useState<BasicGame[]>([]);
   const [formData, setFormData] = useState<BookingRequest>({
     name: '',
     email: '',
     phone: '',
     date: '',
     event_type: '',
-    requirements: ''
+    requirements: '',
+    selected_games: []
   });
 
   useEffect(() => {
-    async function fetchcontactinfo() {
+    async function fetchData() {
       try {
-       
         // Fetch contact info
         const { data: contactData } = await supabase
           .from('contact_info')
           .select('*')
           .single();
 
+        // Fetch games
+        const { data: gamesData } = await supabase
+          .from('basic_game_cards')
+          .select('*')
+          .order('name', { ascending: true });
+
         if (contactData) setContactInfo(contactData);
+        if (gamesData) setGames(gamesData);
       } catch (error) {
-        console.error('Error fetching footer data:', error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
     }
 
-    fetchcontactinfo();
+    fetchData();
   }, []);
 
   const [loading, setLoading] = useState(false);
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -63,7 +73,8 @@ export default function BookingForm() {
         phone: '',
         date: '',
         event_type: '',
-        requirements: ''
+        requirements: '',
+        selected_games: []
       });
     } catch (error) {
       console.error('Error submitting booking:', error);
@@ -80,6 +91,23 @@ export default function BookingForm() {
     });
   };
 
+  const handleGamesChange = (selectedGames: string[]) => {
+    setFormData({
+      ...formData,
+      selected_games: selectedGames
+    });
+  };
+
+  const getLocalizedContent = (en: string | null, ta: string | null) => {
+    if (language === 'ta' && ta) return ta;
+    return en || '';
+  };
+
+  const gameOptions = games.map(game => ({
+    value: game.id,
+    label: getLocalizedContent(game.name, game.name_ta)
+  }));
+
   return (
     <section id="booking" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -92,7 +120,7 @@ export default function BookingForm() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                  {t('booking.name')}
+                  {t('booking.name')} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -109,7 +137,7 @@ export default function BookingForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('booking.email')}
+                    {t('booking.email')} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="email"
@@ -124,7 +152,7 @@ export default function BookingForm() {
                 </div>
                 <div>
                   <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('booking.phone')}
+                    {t('booking.phone')} <span className="text-red-500">*</span>
                   </label>
                   <input
                     type="tel"
@@ -142,7 +170,7 @@ export default function BookingForm() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="relative">
                   <label htmlFor="date" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('booking.date')}
+                    {t('booking.date')} <span className="text-red-500">*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -159,7 +187,7 @@ export default function BookingForm() {
                 </div>
                 <div>
                   <label htmlFor="event_type" className="block text-sm font-medium text-gray-700 mb-1">
-                    {t('booking.eventType')}
+                    {t('booking.eventType')} <span className="text-red-500">*</span>
                   </label>
                   <select
                     id="event_type"
@@ -177,6 +205,19 @@ export default function BookingForm() {
                     <option value="other">{t('booking.other')}</option>
                   </select>
                 </div>
+              </div>
+
+              <div>
+                <label htmlFor="selected_games" className="block text-sm font-medium text-gray-700 mb-1">
+                  {t('booking.selectGames')}
+                </label>
+                <MultiSelect
+                  options={gameOptions}
+                  value={formData.selected_games || []}
+                  onChange={handleGamesChange}
+                  placeholder={t('booking.selectGames')}
+                  disabled={loading}
+                />
               </div>
 
               <div>
