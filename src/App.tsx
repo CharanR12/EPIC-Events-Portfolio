@@ -6,18 +6,21 @@ import Gallery from './components/Gallery';
 import BookingForm from './components/BookingForm';
 import Footer from './components/Footer';
 import { LanguageProvider } from './lib/i18n/LanguageContext';
+import { GameSelectionProvider } from './lib/contexts/GameSelectionContext';
 
 function App() {
   return (
     <LanguageProvider>
-      <div className="min-h-screen">
-        <Navbar />
-        <Hero />
-        <Games />
-        <Gallery />
-        <BookingForm />
-        <Footer />
-      </div>
+      <GameSelectionProvider>
+        <div className="min-h-screen">
+          <Navbar />
+          <Hero />
+          <Games />
+          <Gallery />
+          <BookingForm />
+          <Footer />
+        </div>
+      </GameSelectionProvider>
     </LanguageProvider>
   );
 }

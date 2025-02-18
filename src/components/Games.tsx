@@ -2,39 +2,23 @@ import React, { useEffect, useState } from 'react';
 import BasicGameCard from './BasicGameCard';
 import { supabase } from '../lib/supabase';
 import { useLanguage } from '../lib/i18n/LanguageContext';
-import type { Database } from '../lib/database.types';
-
-type BasicGame = Database['public']['Tables']['basic_game_cards']['Row'];
+import { Game } from './types';
 
 export default function Games() {
-  const [games, setGames] = useState<BasicGame[]>([]);
+  const [games, setGames] = useState<Game[]>([]);
   const [loading, setLoading] = useState(true);
-  const { t, language } = useLanguage();
-
-  const getLocalizedContent = (en: string | null, ta: string | null) => {
-    if (language === 'ta' && ta) return ta;
-    return en || '';
-  };
+  const { t } = useLanguage();
 
   useEffect(() => {
     async function fetchGames() {
       try {
         const { data, error } = await supabase
-          .from('basic_game_cards')
+          .from('games')
           .select('*')
           .order('created_at', { ascending: false });
 
         if (error) throw error;
-        
-        // Apply localization to the fetched games
-        const localizedGames = (data || []).map(game => ({
-          ...game,
-          title: getLocalizedContent(game.title_en, game.title_ta),
-          description: getLocalizedContent(game.description_en, game.description_ta),
-          // Add any other localized fields here
-        }));
-
-        setGames(localizedGames);
+        setGames(data || []);
       } catch (error) {
         console.error('Error fetching games:', error);
       } finally {
@@ -43,7 +27,7 @@ export default function Games() {
     }
 
     fetchGames();
-  }, [language]); // Add language to dependency array to re-fetch when language changes
+  }, []);
 
   return (
     <section id="games" className="py-24 bg-background">
