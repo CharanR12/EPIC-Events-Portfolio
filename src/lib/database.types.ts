@@ -104,6 +104,7 @@ export interface Database {
           id: string
           email: string
           phone: string
+          phone_2: string
           created_at: string
           updated_at: string
         }
@@ -111,6 +112,7 @@ export interface Database {
           id?: string
           email: string
           phone: string
+          phone_2: string
           created_at?: string
           updated_at?: string
         }
@@ -118,6 +120,7 @@ export interface Database {
           id?: string
           email?: string
           phone?: string
+          phone_2: string
           created_at?: string
           updated_at?: string
         }

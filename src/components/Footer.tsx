@@ -169,6 +169,11 @@ export default function Footer() {
                       <Phone className="h-4 w-4" />
                       {contactInfo.phone}
                     </a>
+                  </li>  <li>
+                    <a href={`tel:${contactInfo.phone_2}`} className="text-accent/60 hover:text-accent transition-colors flex items-center gap-2">
+                      <Phone className="h-4 w-4" />
+                      {contactInfo.phone_2}
+                    </a>
                   </li>
                 </>
               )}

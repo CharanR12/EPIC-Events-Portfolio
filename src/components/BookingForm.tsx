@@ -277,9 +277,16 @@ export default function BookingForm() {
                   </div>
                   <div className="ml-4">
                     <h4 className="font-semibold text-gray-900 mb-1">{t('contact.callUs')}</h4>
-                    <span className="text-gray-600 group-hover:text-accent transition-colors">
-                    {contactInfo.phone}
-                    </span>
+                    <div className="flex flex-col">
+                      <span className="text-gray-600 group-hover:text-accent transition-colors">
+                        {contactInfo.phone}
+                      </span>
+                      {contactInfo.phone_2 && (
+                        <span className="text-gray-600 group-hover:text-accent transition-colors">
+                          {contactInfo.phone_2}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </a>
               </div>)}
