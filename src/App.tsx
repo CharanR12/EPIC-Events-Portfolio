@@ -16,7 +16,7 @@ function App() {
         <Hero />
         <Games />
         <OtherServices />
-        <Gallery />
+        {/* <Gallery /> */}
         <BookingForm />
         <Footer />
       </div>

@@ -35,9 +35,9 @@ export default function Navbar() {
             <button onClick={() => scrollToSection('services')} className="text-text/80 hover:text-text transition-colors">
               {t('nav.services')}
             </button>
-            <button onClick={() => scrollToSection('gallery')} className="text-text/80 hover:text-text transition-colors">
+            {/* <button onClick={() => scrollToSection('gallery')} className="text-text/80 hover:text-text transition-colors">
               {t('nav.gallery')}
-            </button>
+            </button> */}
             <button 
               onClick={() => scrollToSection('booking')} 
               className="bg-accent/90 text-secondary px-6 py-2 rounded-lg hover:bg-accent transition-all duration-300 hover:shadow-lg transform hover:-translate-y-0.5 flex items-center gap-2 group font-medium"
@@ -70,9 +70,9 @@ export default function Navbar() {
               <button onClick={() => scrollToSection('services')} className="block w-full text-left px-3 py-2 text-text/80 hover:bg-secondary/10 rounded-md">
                 {t('nav.services')}
               </button>
-              <button onClick={() => scrollToSection('gallery')} className="block w-full text-left px-3 py-2 text-text/80 hover:bg-secondary/10 rounded-md">
+              {/* <button onClick={() => scrollToSection('gallery')} className="block w-full text-left px-3 py-2 text-text/80 hover:bg-secondary/10 rounded-md">
                 {t('nav.gallery')}
-              </button>
+              </button> */}
               <button onClick={() => scrollToSection('booking')} className="block w-full text-center px-3 py-2 bg-accent/90 text-secondary rounded-md hover:bg-accent flex items-center justify-center gap-2">
                 <span>{t('nav.bookNow')}</span>
                 <Calendar className="h-5 w-5" />
