@@ -15,7 +15,7 @@ function App() {
         <Navbar />
         <Hero />
         <Games />
-        <OtherServices />
+        {/* <OtherServices /> */}
         {/* <Gallery /> */}
         <BookingForm />
         <Footer />

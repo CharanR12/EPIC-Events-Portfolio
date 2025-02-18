@@ -100,7 +100,7 @@ export default function Footer() {
               
               {footerContent ? getLocalizedContent(footerContent.company_description, footerContent.company_description_ta) : t('hero.title')}
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               {socialLinks.map((link) => (
                 <a
                   key={link.id}
@@ -112,7 +112,7 @@ export default function Footer() {
                   {getIconComponent(link.icon)}
                 </a>
               ))}
-            </div>
+            </div> */}
           </div>
 
           <div>
@@ -134,6 +134,16 @@ export default function Footer() {
                   {t('nav.games')}
                 </button>
               </li>
+
+              {/* <li>
+                <button
+                  onClick={() => scrollToSection('services')}
+                  className="text-accent/60 hover:text-accent transition-colors"
+                >
+                  {t('nav.services')}
+                </button>
+              </li>
+              
               <li>
                 <button
                   onClick={() => scrollToSection('gallery')}
@@ -141,7 +151,7 @@ export default function Footer() {
                 >
                   {t('nav.gallery')}
                 </button>
-              </li>
+              </li> */}
               <li>
                 <button
                   onClick={() => scrollToSection('booking')}
